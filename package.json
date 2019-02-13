@@ -1,0 +1,32 @@
+{
+  "name": "new-folder",
+  "version": "1.0.0",
+  "description": "Node.js first app",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ./"
+  },
+  "keywords": [
+    "Node.js",
+    "javascript"
+  ],
+  "author": "Nurlan Mirzayev",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.0",
+    "@babel/node": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.0",
+    "eslint-plugin-react": "^7.12.4",
+    "nodemon": "^1.18.7"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
