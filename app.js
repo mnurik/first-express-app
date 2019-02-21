@@ -5,15 +5,19 @@ import router from './routes/index';
 
 const app = express();
 
+app.use(cookieParser());
+app.use(bodyParser.json());
+
 app.use((req, res, next) => {
   req.parsedCookies = req.cookies;
+  next();
+});
+
+app.use((req, res, next) => {
   req.parsedQuery = req.query;
   next();
 });
 
-app.use(cookieParser());
-app.use(bodyParser.json());
-
-app.use('/api', router);
+app.use('/api/products', router);
 
 export default app;

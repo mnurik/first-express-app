@@ -1,7 +1,7 @@
 import fs from 'fs';
 import products from '../data/products.json';
 
-export default (data, res, next) => {
+export default data => new Promise((resolve, reject) => {
   const writable = fs.createWriteStream('./data/products.json');
 
   writable.write(JSON.stringify([
@@ -13,8 +13,8 @@ export default (data, res, next) => {
   ]));
 
   writable.on('error', (error) => {
-    next(error);
+    reject(error);
   });
 
-  writable.end(() => res.json(products));
-};
+  writable.end(resolve);
+});

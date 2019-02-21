@@ -2,25 +2,31 @@ import products from '../data/products.json';
 import writeToFile from '../helpers/writeToFile';
 
 export default (router) => {
-  router.route('/products')
+  router.route('/')
     .get((req, res) => {
+      // TODO: use async read file
       res.json(products);
     })
-    .post((req, res, next) => {
-      writeToFile(req.body, res, next);
+    .post(async (req, res, next) => {
+      try {
+        await writeToFile(req.body);
+      } catch (error) {
+        next(error);
+      }
+      res.json(products);
     });
 
-  router.get('/products/:id', (req, res, next) => {
+  router.get('/:id', (req, res, next) => {
     const product = products.find(({ id }) => id === +req.params.id);
 
     if (product) {
       res.json(product);
     } else {
-      next(new Error(`Can't find product with id:${req.params.id}`));
+      res.status(404).send({ error: `Can't find product with id:${req.params.id}` });
     }
   });
 
-  router.get('/products/:id/options', (req, res, next) => {
+  router.get('/:id/options', (req, res, next) => {
     const product = products.find(({ id }) => id === +req.params.id);
 
     if (product) {
@@ -31,6 +37,7 @@ export default (router) => {
   });
 
   router.use((error, req, res) => {
+    res.status(500);
     res.json({
       success: false,
       message: error,
