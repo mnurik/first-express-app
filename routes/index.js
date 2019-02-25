@@ -1,8 +1,9 @@
-import express from 'express';
 import products from './products';
+import users from './users';
+import auth from './auth';
 
-const router = express.Router();
-
-products(router);
-
-export default router;
+export {
+  products,
+  users,
+  auth,
+};

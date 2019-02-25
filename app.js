@@ -1,7 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import router from './routes/index';
+import { products, auth, users } from './routes/index';
 
 const app = express();
 
@@ -18,6 +18,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/products', router);
+app.use('/api/products', products);
+app.use('/api/users', users);
+app.use('/api/auth', auth);
 
 export default app;
