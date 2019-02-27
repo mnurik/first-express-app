@@ -1,6 +1,7 @@
 import express from 'express';
 import products from '../data/products.json';
 import writeToFile from '../helpers/writeToFile';
+import verificationJWT from '../middlewares/auth';
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.route('/')
     res.json(products);
   });
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', verificationJWT, (req, res, next) => {
   const product = products.find(({ id }) => id === +req.params.id);
 
   if (product) {
