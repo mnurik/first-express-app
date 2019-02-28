@@ -2,7 +2,11 @@
 import users from '../data/users.json';
 
 export const findUser = ({ login }, cb) => {
-  cb(users.find(user => user.login === login));
+  try {
+    cb(null, users.find(user => user.login === login));
+  } catch (error) {
+    cb(error);
+  }
 };
 
 export const verifyPassword = ({ login, password }) => findUser(login).password === password;
