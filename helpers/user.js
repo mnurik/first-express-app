@@ -1,12 +1,18 @@
 /* eslint-disable import/prefer-default-export */
 import users from '../data/users.json';
 
-export const findUser = ({ login }, cb) => {
+export const findUser = ({ login }) => new Promise((resolve, reject) => {
   try {
-    cb(null, users.find(user => user.login === login));
+    resolve(users.find(user => user.login === login));
   } catch (error) {
-    cb(error);
+    reject(error);
   }
-};
+});
 
-export const verifyPassword = ({ login, password }) => findUser(login).password === password;
+export const verifyPassword = ({ login, password }) => new Promise((resolve, reject) => {
+  try {
+    findUser({ login }).then(user => resolve(user.password === password));
+  } catch (error) {
+    reject(error);
+  }
+});
