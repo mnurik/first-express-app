@@ -1,4 +1,6 @@
 {
   "port": "8080",
-  "secret": "nurik"
+  "secret": "nurik",
+  "FACEBOOK_APP_ID": 603001613506037,
+  "FACEBOOK_APP_SECRET": "a37aed77be774392b19e72dbf26946ae"
 }

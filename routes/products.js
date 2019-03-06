@@ -5,12 +5,14 @@ import verificationJWT from '../middlewares/auth';
 
 const router = express.Router();
 
+router.use(verificationJWT);
+
 router.route('/')
-  .get(verificationJWT, (req, res) => {
+  .get((req, res) => {
     // TODO: use async read file
     res.json(products);
   })
-  .post(verificationJWT, async (req, res, next) => {
+  .post(async (req, res, next) => {
     try {
       await writeToFile(req.body);
     } catch (error) {
@@ -19,7 +21,7 @@ router.route('/')
     res.json(products);
   });
 
-router.get('/:id', verificationJWT, (req, res, next) => {
+router.get('/:id', (req, res) => {
   const product = products.find(({ id }) => id === +req.params.id);
 
   if (product) {
@@ -29,7 +31,7 @@ router.get('/:id', verificationJWT, (req, res, next) => {
   }
 });
 
-router.get('/:id/options', verificationJWT, (req, res, next) => {
+router.get('/:id/options', (req, res, next) => {
   const product = products.find(({ id }) => id === +req.params.id);
 
   if (product) {
@@ -39,7 +41,7 @@ router.get('/:id/options', verificationJWT, (req, res, next) => {
   }
 });
 
-router.use((error, req, res) => {
+router.use((error, req, res, next) => {
   res.status(500);
   res.json({
     success: false,

@@ -20,6 +20,8 @@ router.route('/')
     }
   });
 
+router.get('/facebook', passport.authenticate('facebook'));
+
 router.use((error, req, res) => {
   res.status(500);
   res.json({
