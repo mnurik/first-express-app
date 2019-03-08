@@ -2,5 +2,26 @@
   "port": "8080",
   "secret": "nurik",
   "FACEBOOK_APP_ID": 603001613506037,
-  "FACEBOOK_APP_SECRET": "a37aed77be774392b19e72dbf26946ae"
+  "FACEBOOK_APP_SECRET": "a37aed77be774392b19e72dbf26946ae",
+  "development": {
+    "username": "nurlan",
+    "password": null,
+    "database": "mydb",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
 }

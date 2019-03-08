@@ -14,4 +14,11 @@ app.use('/api/products', products);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
 
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
 export default app;

@@ -1,12 +1,13 @@
 import jwt from 'jsonwebtoken';
 import config from '../config/config.json';
-import users from '../data/users.json';
+import models from '../models';
 
-const verificationJWT = (req, res, next) => {
+const verificationJWT = async (req, res, next) => {
   try {
     if (req.headers.token) {
       const decoded = jwt.verify(req.headers.token, config.secret);
-      if (users.find(user => user.login === decoded.user)) {
+      const user = await models.User.findOne({ where: { login: decoded.user } });
+      if (user !== null) {
         next();
       }
     }
