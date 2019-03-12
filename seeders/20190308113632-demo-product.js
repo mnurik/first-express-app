@@ -1,11 +1,8 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.bulkInsert('Products', [{
+  up: (queryInterface, Sequelize) => queryInterface.bulkInsert('products', [{
     name: 'Supreme T-Shirt',
     brand: 'Supreme',
     price: 99.99,
-    size: 1,
-    createdAt: new Date(),
-    updatedAt: new Date(),
   }], {}),
 
   down: (queryInterface, Sequelize) => {

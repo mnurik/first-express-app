@@ -6,7 +6,12 @@
   "scripts": {
     "start": "nodemon --exec babel-node ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ./"
+    "lint": "eslint ./",
+    "db:create": "sequelize db:create",
+    "db:drop": "sequelize db:drop",
+    "db:sync": "babel-node ./db/sync.js",
+    "db:seed": "sequelize db:seed:all",
+    "db:restart": "sequelize db:drop && sequelize db:create"
   },
   "keywords": [
     "Node.js",

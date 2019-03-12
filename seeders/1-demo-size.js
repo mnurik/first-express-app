@@ -1,21 +1,15 @@
 'use strict';
 
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.bulkInsert('Sizes', [
+  up: (queryInterface, Sequelize) => queryInterface.bulkInsert('sizes', [
     {
       name: 'XS',
-      createdAt: new Date(),
-      updatedAt: new Date(),
     },
     {
       name: 'SM',
-      createdAt: new Date(),
-      updatedAt: new Date(),
     },
     {
       name: 'M',
-      createdAt: new Date(),
-      updatedAt: new Date(),
     },
   ], {}),
   down: (queryInterface, Sequelize) => {

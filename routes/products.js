@@ -1,6 +1,8 @@
 import express from 'express';
 import verificationJWT from '../middlewares/auth';
-import models from '../models';
+import Product from '../models/product';
+import ProductOption from '../models/product_options';
+import Size from '../models/size';
 
 const router = express.Router();
 
@@ -9,7 +11,14 @@ router.use(verificationJWT);
 router.route('/')
   .get(async (req, res, next) => {
     try {
-      const products = await models.Product.findAll();
+      const products = await Product.findAll({ include: [{ all: true, nested: true }] });
+      // const products = await Product.findAll({
+      //   include: [{
+      //     model: ProductOption,
+      //     as: 'options',
+      //     include: [Size],
+      //   }],
+      // });
       res.json(products);
     } catch (error) {
       next(error);
@@ -17,8 +26,8 @@ router.route('/')
   })
   .post(async (req, res, next) => {
     try {
-      await models.Product.create(req.body);
-      const products = await models.Product.findAll();
+      await Product.create(req.body, { include: [ProductOption] });
+      const products = await Product.findAll({ include: [{ all: true, nested: true }] });
       res.json(products);
     } catch (error) {
       next(error);
@@ -27,7 +36,7 @@ router.route('/')
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const product = await models.Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id, { include: [{ all: true, nested: true }] });
     if (product === null) {
       res.status(404).send({ error: `Can't find product with id: ${req.params.id}` });
     }
@@ -37,13 +46,20 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.get('/:id/options', (req, res, next) => {
-  const product = products.find(({ id }) => id === +req.params.id);
-
-  if (product) {
-    res.json(product.options);
-  } else {
-    next(new Error(`Can't find product with id:${req.params.id}`));
+router.get('/:id/options', async (req, res, next) => {
+  try {
+    const options = await ProductOption.findAll({ where: { productId: req.params.id } });
+    if (options.length) {
+      res.json(options);
+    } else {
+      res.status(404);
+      res.json({
+        success: false,
+        message: `Can't find product with id:${req.params.id}`,
+      });
+    }
+  } catch (error) {
+    next(error);
   }
 });
 

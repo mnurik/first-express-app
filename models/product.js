@@ -1,31 +1,10 @@
 import Sequelize from 'sequelize';
-import Size from './size';
+import sequelize from './index';
 
-module.exports = (sequelize, DataTypes) => {
-  const Product = sequelize.define('Product', {
-    name: DataTypes.STRING,
-    brand: DataTypes.STRING,
-    price: DataTypes.FLOAT,
-    // options: [
-    //   {
-    //     size: {
-    //       type: DataTypes.INTEGER,
-    //       references: {
-    //         model: Size,
-    //         key: 'id',
-    //       },
-    //     },
-    //   },
-    // ],
-    size: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: Size,
-        key: 'id',
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
-      },
-    },
-  }, {});
-  // Product.hasMany(Size, { foreignKey: 'size' });
-  return Product;
-};
+const Product = sequelize.define('product', {
+  name: Sequelize.STRING,
+  brand: Sequelize.STRING,
+  price: Sequelize.FLOAT,
+}, { createdAt: false, updatedAt: false });
+
+export default Product;

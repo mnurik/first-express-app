@@ -1,13 +1,13 @@
 import express from 'express';
 import verificationJWT from '../middlewares/auth';
-import models from '../models';
+import User from '../models/user';
 
 const router = express.Router();
 
 router.route('/')
   .get(verificationJWT, async (req, res, next) => {
     try {
-      const users = await models.User.findAll();
+      const users = await User.findAll();
       res.json(users);
     } catch (error) {
       next(error);
