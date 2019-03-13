@@ -26,9 +26,9 @@ router.route('/')
   })
   .post(async (req, res, next) => {
     try {
-      await Product.create(req.body, { include: [ProductOption] });
-      const products = await Product.findAll({ include: [{ all: true, nested: true }] });
-      res.json(products);
+      const product = await Product.create(req.body, { include: [ProductOption] });
+      // const products = await Product.findAll({ include: [{ all: true, nested: true }] });
+      res.status(201).json(product);
     } catch (error) {
       next(error);
     }
