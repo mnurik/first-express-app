@@ -1,10 +1,17 @@
-import Sequelize from 'sequelize';
-import sequelize from './index';
+import mongoose, { Schema } from 'mongoose';
 
-const Product = sequelize.define('product', {
-  name: Sequelize.STRING,
-  brand: Sequelize.STRING,
-  price: Sequelize.FLOAT,
-}, { createdAt: false, updatedAt: false });
+const productSchema = new Schema({
+  name: String,
+  brand: String,
+  price: Number,
+  options: [
+    {
+      size: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Size',
+      },
+    },
+  ],
+});
 
-export default Product;
+export default mongoose.model('Product', productSchema);

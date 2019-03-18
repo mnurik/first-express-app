@@ -1,7 +1,12 @@
-import Sequelize from 'sequelize';
-import sequelize from './index';
+import mongoose, { Schema } from 'mongoose';
 
-export default sequelize.define('user', {
-  login: Sequelize.STRING,
-  password: Sequelize.STRING,
-}, { createdAt: false, updatedAt: false });
+const userSchema = new Schema({
+  login: String,
+  password: String,
+  name: {
+    first: String,
+    last: String,
+  },
+});
+
+export default mongoose.model('User', userSchema);

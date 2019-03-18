@@ -6,7 +6,7 @@ const verificationJWT = async (req, res, next) => {
   try {
     if (req.headers.token) {
       const decoded = jwt.verify(req.headers.token, config.secret);
-      const user = await User.findOne({ where: { login: decoded.user } });
+      const user = await User.findOne({ login: decoded.user });
       if (user !== null) {
         next();
       }

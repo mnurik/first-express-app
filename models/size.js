@@ -1,12 +1,7 @@
-import Sequelize from 'sequelize';
-import sequelize from './index';
-import ProductOption from './product_options';
+import mongoose, { Schema } from 'mongoose';
 
-const Size = sequelize.define('size', {
-  name: Sequelize.STRING,
-}, { createdAt: false, updatedAt: false });
+const sizeSchema = new Schema({
+  name: String,
+});
 
-ProductOption.belongsTo(Size);
-Size.hasMany(ProductOption);
-
-export default Size;
+export default mongoose.model('Size', sizeSchema);

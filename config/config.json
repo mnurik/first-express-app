@@ -3,6 +3,7 @@
   "secret": "nurik",
   "FACEBOOK_APP_ID": 603001613506037,
   "FACEBOOK_APP_SECRET": "a37aed77be774392b19e72dbf26946ae",
+  "mlabUri": "mongodb+srv://nurlan:eror@cluster0-hwbgw.mongodb.net/mydb?retryWrites=true",
   "development": {
     "username": "nurlan",
     "password": null,
