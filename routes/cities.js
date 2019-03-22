@@ -6,8 +6,8 @@ const router = express.Router();
 router.route('/')
   .get(async (req, res, next) => {
     try {
-      const cities = await City.find();
-      res.json(cities[Math.floor(Math.random() * cities.length)]);
+      const city = await City.aggregate([{ $sample: { size: 1 } }]);
+      res.json(city);
     } catch (error) {
       next(error);
     }
