@@ -19,7 +19,7 @@ router
       if (user === null) {
         res.status(404).send({ error: `Can't find user with id: ${req.params.id}` });
       }
-      res.status(200).json();
+      res.status(204).json();
     } catch (error) {
       next(error);
     }

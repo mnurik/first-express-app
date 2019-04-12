@@ -18,15 +18,7 @@ router.route('/')
   })
   .post(async (req, res, next) => {
     try {
-      let sizes = [];
-      const { options, ...data } = req.body;
-      if (options) {
-        sizes = await Promise.all(options.map(async (option) => {
-          const size = await Size.findById(option.sizeId);
-          return size;
-        }));
-      }
-      const newProduct = new Product({ ...data, options: sizes.map(size => ({ size: size._id })) });
+      const newProduct = new Product(req.body);
       const product = await newProduct.save();
 
       res.status(201).json(product);
@@ -53,7 +45,7 @@ router
       if (product === null) {
         res.status(404).send({ error: `Can't find product with id: ${req.params.id}` });
       }
-      res.status(200).json();
+      res.status(204).json();
     } catch (error) {
       next(error);
     }

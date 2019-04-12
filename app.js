@@ -13,7 +13,7 @@ passport(app);
 app.use('/api/products', products);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
-app.use('/api/city', cities);
+app.use('/api/cities', cities);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -22,5 +22,8 @@ app.use((req, res, next) => {
     message: 'Not Found',
   });
 });
+
+// TODO: Docker
+// TODO: GraphQL
 
 export default app;

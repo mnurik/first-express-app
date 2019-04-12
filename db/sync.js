@@ -7,19 +7,14 @@ import City from '../models/cities';
 import config from '../config/config.json';
 
 mongoose.connect(config.mlabUri, { useNewUrlParser: true })
-  .then((db) => {
+  .then(() => {
     console.log('Database connection established!');
-
-    // db.cities.remove({});
-    // db.products.remove({});
-    // db.sizes.remove({});
-    // db.users.remove({});
 
     const sizeS = new Size({ name: 'S' });
     const sizeM = new Size({ name: 'M' });
     const sizeXL = new Size({ name: 'XL' });
 
-    // [sizeS, sizeM, sizeXL].forEach(el => el.save());
+    [sizeS, sizeM, sizeXL].forEach(el => el.save());
 
     const firstProduct = new Product({
       name: 'Supreme T-Shirt', brand: 'Supreme', price: 99.99, options: [{ size: sizeXL._id }],
@@ -31,26 +26,26 @@ mongoose.connect(config.mlabUri, { useNewUrlParser: true })
       name: 'Nike T-Shirt', brand: 'Nike', price: 300, options: [{ size: sizeM._id }],
     });
 
-    // [firstProduct, secondProduct, thirdProduct].forEach(pr => pr.save());
+    [firstProduct, secondProduct, thirdProduct].forEach(pr => pr.save());
 
-    // User.insertMany([
-    //   {
-    //     name: {
-    //       first: 'Ines',
-    //       last: 'Lowe',
-    //     },
-    //     login: 'Warner',
-    //     password: 'ea',
-    //   },
-    //   {
-    //     name: {
-    //       first: 'Brock',
-    //       last: 'Beasley',
-    //     },
-    //     login: 'Morales',
-    //     password: 'id',
-    //   },
-    // ], console.log);
+    User.insertMany([
+      {
+        name: {
+          first: 'Ines',
+          last: 'Lowe',
+        },
+        login: 'Warner',
+        password: 'ea',
+      },
+      {
+        name: {
+          first: 'Brock',
+          last: 'Beasley',
+        },
+        login: 'Morales',
+        password: 'id',
+      },
+    ], console.log);
 
     City.insertMany([
       {
@@ -72,7 +67,6 @@ mongoose.connect(config.mlabUri, { useNewUrlParser: true })
         },
       },
     ], console.log);
-    // db.close();
   }, (err) => {
     console.log('Error connecting Database instance due to: ', err);
   });
