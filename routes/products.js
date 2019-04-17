@@ -1,6 +1,5 @@
 import express from 'express';
 import verificationJWT from '../middlewares/auth';
-import Size from '../models/size';
 import Product from '../models/product';
 
 const router = express.Router();

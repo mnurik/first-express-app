@@ -7,12 +7,16 @@ const router = express.Router();
 
 router.route('/')
   .post(passport.authenticate('local', { session: false }), (req, res, next) => {
-    const { password, ...userData } = req.user;
+    const {
+      name,
+      _id,
+      login,
+    } = req.user;
     try {
       res.json({
         code: 200,
         message: 'Ok',
-        data: userData,
+        data: { name, _id, login },
         token: jwt.sign({ user: req.body.login }, config.secret),
       });
     } catch (err) {

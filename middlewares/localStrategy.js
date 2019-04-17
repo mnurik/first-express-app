@@ -1,7 +1,6 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { findUser, verifyPassword } from '../helpers/user';
-import models from '../models';
+import User from '../models/user';
 
 passport.use(new LocalStrategy({
   usernameField: 'login',
@@ -9,12 +8,8 @@ passport.use(new LocalStrategy({
   session: false,
 }, async (login, password, done) => {
   try {
-    const { dataValues: user } = await models.User.findOne({ where: { login } });
+    const user = await User.findOne({ login });
     if (!user) { return done(null, false); }
-    console.log('====================================');
-    console.log(typeof user, user);
-    console.log('====================================');
-    // const passwordIsCorrect = await verifyPassword({ login, password });
     if (password !== user.password) { return done(null, false); }
 
     return done(null, user);
