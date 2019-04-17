@@ -17,13 +17,13 @@ export default `
   }
   
   type Query {
-    user(id: String!): User
+    user(_id: String, login: String): User
     users: [User]
   }
   
   type Mutation {
-    addUser(id: String!, name: NameInput!, login: String!, password: String!): User
-    editUser(id: String, name: NameInput, login: String, password: String): User
-    deleteUser(id: String): User
+    addUser(name: NameInput!, login: String!, password: String!): User
+    editUser(_id: String!, name: NameInput, password: String): User
+    deleteUser(_id: String): User
   }
 `;
